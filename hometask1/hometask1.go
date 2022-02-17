@@ -5,28 +5,21 @@ import "fmt"
 func main() {
 
 	var A = []int{3, 8, 9, 7, 6}
-	var K = 1
-	fmt.Println(Solution(A, K))
-	// fmt.Println(A)
-	// fmt.Println(K)
+	fmt.Println("i", A)
+	for i := 0; i <= 10; i++ {
+		fmt.Println(i, Solution(A, i))
+	}
 }
 
 func Solution(A []int, K int) []int {
-	var result = A
-	for i := 0; i < K; i++ {
-		result = OneRotation(A)
-	}
-	return result
-}
+	var newIndex int
+	var result []int
 
-func OneRotation(A []int) []int {
-	var result = A
-	// result[0] = A[len(A)-1]
-	// fmt.Println(result[0])
-	for i := 1; i < len(A); i++ {
-		fmt.Println(A[i-1])
-		result[i] = A[i-1]
-		// fmt.Println(result[i])
+	K = K % len(A)
+
+	for i := len(A) - K; i < len(A)-K+len(A); i++ {
+		newIndex = i - ((i)/len(A))*len(A)
+		result = append(result, A[newIndex])
 	}
 	return result
 }
