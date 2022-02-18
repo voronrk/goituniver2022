@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	var A = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9}
+	var A = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
 
 	// var A []int
 	// for i := 0; i <= 100000; i++ {
@@ -18,14 +18,16 @@ func main() {
 
 func Solution(A []int) int {
 
-	if doubleSeek(A) == 1 {
-		return 0
-	}
-
 	min := 1000000000
 	max := 1
+	var hash = map[int]int{}
 
 	for i := 0; i < len(A); i++ {
+		if _, ok := hash[A[i]]; ok {
+			return 0
+		} else {
+			hash[A[i]] = 1
+		}
 		if min > A[i] {
 			min = A[i]
 		}
@@ -39,19 +41,6 @@ func Solution(A []int) int {
 	fmt.Println("len ", len(A))
 	if max-min+1 == len(A) {
 		return 1
-	}
-	return 0
-}
-
-func doubleSeek(A []int) int {
-	var hash = map[int]int{}
-
-	for i := 0; i < len(A); i++ {
-		if _, ok := hash[A[i]]; ok {
-			return 1
-		} else {
-			hash[A[i]] = 1
-		}
 	}
 	return 0
 }
